@@ -15,45 +15,12 @@ BOLTZMANN_CONSTANT = 0.0019872041  # k, kcal/mol/K
 TEMPERATURE = 298.15  # temperature, (K)
 
 #
-def remove_training_smiles():
-
-    from rdkit import Chem
-
-    # load CPI datset from SolvFunc-87
-    ref_can_smiles = []
-    with open(CPI_DIR / "SolvFunc-87.csv", "r") as f:
-        lines = f.readlines()
-        titles = lines[0].strip("\n").split(";")
-        smiles_col = titles.index("SMILES")
-        ref_can_smiles = [Chem.CanonSmiles(l.strip("\n").split(";")[smiles_col]) for l in lines[1:]]
-
-    # 
-    read_lines = []
-    test_smiles = []
-    test_can_smiles = []
-    with open(TEST_DIR / "external_set.csv", "r") as f:
-        read_lines = f.readlines()
-        smiles_col = read_lines[0].strip("\n").split(";").index("SMILES")
-        test_smiles = [l.strip("\n").split(";")[smiles_col] for l in read_lines[1:]]
-        test_can_smiles = [Chem.CanonSmiles(smi) for smi in test_smiles]
-
-    # save to csv
-    with open(TEST_DIR / f"external_set-unseed.csv", "w") as g:
-        g.write(read_lines[0])
-        for mol_index in range(0, len(test_smiles)):
-            if "F" in test_can_smiles[mol_index]:
-                continue
-            elif test_can_smiles[mol_index] in ref_can_smiles:
-                continue
-            g.write(read_lines[mol_index+1])
-
-#
 def gen_mol_feature_files():
 
     smiles = []
     titles = []
     lines = []
-    with open(TEST_DIR / f"external_set-unseed-filters.csv", "r") as f:
+    with open(TEST_DIR / f"external_set-filters.csv", "r") as f:
         lines = f.readlines()
         titles = lines[0].strip("\n").split(";")
         smiles_col = titles.index("SMILES")
@@ -95,7 +62,7 @@ def gen_mol_feature_files():
     print(electronegative_atoms)
 
     # output
-    result_file = TEST_DIR / "external_set-unseed-filters-features.csv"
+    result_file = TEST_DIR / "external_set-filters-features.csv"
     if os.path.exists(result_file):
         os.remove(result_file)
 
@@ -206,7 +173,7 @@ def gen_mol_feature_files():
 def predict_cpi():
 
     # change it manully, and the input_file should be including the delta E
-    input_file_name = "external_set-unseed-filters-features"
+    input_file_name = "external_set-filters-features"
     input_file = TEST_DIR / f"{input_file_name}.csv"
     if not os.path.exists(input_file):
         raise ValueError(f"No input_file were found")
@@ -287,7 +254,7 @@ def print_report():
     # read prediction results
     mol_cpis = []
     mol_functs = []
-    with open(TEST_DIR / f"external_set-unseed-filters-features-predictions.csv", "r") as f:
+    with open(TEST_DIR / f"external_set-filters-features-predictions.csv", "r") as f:
         lines = f.readlines()
         titles = lines[0].strip("\n").split(";")
         cpi_col = titles.index("CPI")
@@ -299,19 +266,16 @@ def print_report():
     true_label = [0 if "WSE" in funct else 1 for funct in mol_functs]
     pred_label = [0 if cpi < 0.5 else 1 for cpi in mol_cpis]
 
-    from sklearn.metrics import ConfusionMatrixDisplay
-    import matplotlib.pyplot as plt
-
-    disp = ConfusionMatrixDisplay.from_predictions(y_true=true_label, y_pred=pred_label)
-    plt.savefig(TEST_DIR / "confusion_matrix.png", dpi=300, bbox_inches="tight")
+    # from sklearn.metrics import ConfusionMatrixDisplay
+    # import matplotlib.pyplot as plt
+    # disp = ConfusionMatrixDisplay.from_predictions(y_true=true_label, y_pred=pred_label)
+    # plt.savefig(TEST_DIR / "confusion_matrix.png", dpi=300, bbox_inches="tight")
 
     from sklearn.metrics import classification_report
     print(classification_report(true_label, pred_label))
 
 # 
 if __name__ == "__main__":
-
-    # remove_training_smiles()
 
     gen_mol_feature_files()
 
