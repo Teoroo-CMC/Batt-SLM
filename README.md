@@ -1,15 +1,17 @@
-#  This repository implements a unified generative–predictive framework for molecular design, combining generative AI, redox property prediction, and chemical–protein interaction (CPI) modeling to enable multi-objective molecular optimization.
+#  
+
+This repository implements a unified generative–predictive framework for molecular design, combining generative AI, redox property prediction, and chemical–protein interaction (CPI) modeling to enable multi-objective molecular optimization.
 
 # Project structure
 ```text
 Batt-SLM/
-├── 1_Batt-SLM/                              # Directory: the battery solvent-like mols (Batt-SLM)
+├── 1_Batt-SLM/                              # Directory: the battery solvent-like molecules
 │   ├── Batt-SLM-PriorI.smi                  # The Batt-SLM for training the prior I
 │   ├── KBS-409.csv                          # The placeholder for the KBS-409 dataset
 │   ├── KBS-FP-174.smi                       # The placeholder for molecules in the KBS-409 with either F or P
 │   └── filter_smiles.py                     # The python code to filter SMILES according to the 
 │                                              selection criteria listed in Section 1 of the SI
-├── 7_redox_free_ener/                       # Directory: the ML models for redox ponteital (RX)
+├── 7_redox_free_ener/                       # Directory: the ML models for redox potential prediction
 ├── 2_Batt-P30K/                             # Directory: the Batt-P30K dataset
 │   ├── Batt-P30K.h5                         # The placeholder for the Batt-P30K dataset 
 │   ├── io/                                  # The dataloader for Batt-P30K.h5 in the PiNN package 
@@ -33,7 +35,7 @@ Batt-SLM/
 │   ├── LR-EAIP-RedoxFreeEner/                
 │   │   └── EAIP_Redox.jpg                   # The linear fitting results
 │   └── redox_free_ener.py                   # The python code for linear fitting      
-├── 8_CPI_index/                             # Diectory: the chelation propensity index (CPI)
+├── 8_CPI_index/                             # Diectory: the chelation propensity index (CPI) model
 │   ├── SolvFunc-87.csv                      # The functions of collected solvents in battery
 │   ├── Input/
 │   │   ├── Features.csv                     # The features of all solvents in Fig. 5 of main text
