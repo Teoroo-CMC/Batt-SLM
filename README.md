@@ -76,10 +76,11 @@ cp -r {PROJ_DIR}/Batt-P30K/io {PiNN_DIR}/
 ```
 
 # Usage
-+ training PiNet2 models for EA/IP on GPU
++ training PiNet2 models on GPU
 ```
 # Note: you may need to manually download the Batt-P30K/Battery-P30K.h5 file
 cd {PROJ_DIR}/Batt-P30K
+# Change the target property and random seed in build_pinet2.py manually
 python build_pinet2.py
 ```
 + predicting redox potentials for given XYZ files
