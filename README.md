@@ -63,7 +63,7 @@ In the following project structure, _*_ denotes the random seed, _<...>_ indicat
 # Installation
 + download the project repo
 ```
-git clone https://github.com/zzy2014/Batt-SLM-Redox-CPI.git
+git clone https://github.com/Teoroo-CMC/Batt-SLM-Redox-CPI.git
 ```
 + create the conda environment
 ```
