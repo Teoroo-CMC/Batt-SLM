@@ -1,21 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-A hdf5 data loader for the EAIP dataset build by Zhan-Yun Zhang, which has the following format
-    begin
-    lattice float float float
-    lattice float float float
-    lattice float float float
-    atom floatcoordx floatcoordy floatcoordz int_atom_symbol floatq 0  floatforcex floatforcey floatforcez
-    atom 1           2           3           4               5      6  7           8           9
-    energy float
-    charge float
-    comment arbitrary string
-    end
-Due to the flexibility of the hdf5 format, if you want to load other datasets, you need to modify this file
+A hdf5 data loader for the EAIP dataset build by Zhan-Yun Zhang
 """
 
 def _hdf5_spec(label_map):
-    """Returns format dict for the QM9 dataset"""
+    """Returns format dict for the dataset"""
     ds_spec = {
         'elems': {'dtype':  'int32',   'shape': [None]},
         'coord': {'dtype':  'float', 'shape': [None, 3]}}
