@@ -55,7 +55,7 @@ In the following project structure, _*_ denotes the random seed, _<...>_ indicat
 │   │   └── external_set-filters-features-predictions.csv # The prediction results
 │   ├── chelation_propensity_index.py       # The python code for CPI
 │   ├── random_test.py                      # The python code for evaluation
-│   ├── external_test.py                    # The python code for external test
+│   └── external_test.py                    # The python code for external test
 └── environment.yml                         # The conda environment file for the project
 ```
 # Installation
