@@ -1,5 +1,5 @@
 # Batt-SLM
-This repository provides the battery solvent-like molecules (Batt-SLM) dataset, redox potential prediction models and chelation propensity index (CPI) associated with the manuscript "Unlocking the Chemical Space for Rechargeable Batteries with a Generative Solvent Design System" (https://doi.org/10.26434/chemrxiv.15001594/v1).
+This repository provides the battery solvent-like molecules (Batt-SLM) dataset, redox potential prediction models and chelation propensity index (CPI) associated with the preprint "Z.-Y. Zhang, R. Mercado., T. T. Le, C. Zhang, Unlocking the Chemical Space for Rechargeable Batteries with Generative Solvent Design System (2026)" (https://doi.org/10.26434/chemrxiv.15001594/v1).
 
 # Project structure
 In the following project structure, _*_ denotes the random seed, _<...>_ indicates an arbitrary sequence of characters.
